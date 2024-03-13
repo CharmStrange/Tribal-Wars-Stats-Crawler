@@ -29,7 +29,7 @@ I examined HTML structure of 'Tribal Wars Stats' to crawl data. And wrote approp
 # Body
 **Language** : **Python**
 
-**Library** : **request**, **BeautifulSoup**, **sqlite3**
+**Library** : **requests**, **BeautifulSoup**, **sqlite3**
 
 **Source Code** : [src.py](src.py)
 
