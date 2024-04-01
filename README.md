@@ -22,7 +22,7 @@ Tribal Wars (TW) is a browser-based, real-time strategy, massively multiplayer o
 
 ---
 # Head
-I enjoyed playing Tribal Wars, which was developed by [InnoGames](https://www.innogames.com/). InnoGames provides some useful online tools for players, one of them is '[Tribal Wars Stats](https://www.twstats.com/)'. 
+I enjoyed playing Tribal Wars, which was developed by [InnoGames](https://www.innogames.com/). InnoGames provides some useful online tools for players, one of them is '[Tribal Wars Stats](https://www.twstats.com/)'(No robots.txt). 
 
 I examined HTML structure of 'Tribal Wars Stats' to crawl data. And wrote appropriate script, purpose was to generate / provide useful data files for players who are interested in player data / data analysis.
 
