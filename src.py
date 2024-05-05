@@ -1,4 +1,4 @@
-# Executing Time : (3m 33s) It differs every time. 
+# Executing Time : (5m 1s) It differs every time.
 
 import requests
 from bs4 import BeautifulSoup
@@ -9,24 +9,25 @@ response = requests.get(URL)
 
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
-    td_elements = soup.find_all('td') 
-    
-    World_URLs = [] 
-    
+    td_elements = soup.find_all('td')
+
+    World_URLs = []
+
     for td in td_elements:
-        a_element = td.find('a')  
+        a_element = td.find('a')
         if a_element:
             href = a_element.get('href')
             if href.startswith('/e'):
                 World_URLs.append(href)
-            #print("Text:", a_element.text)
-            #print("Href:", href)
-            #print()
-    
+
 else:
     print(response.status_code)
-
+# Checking open/closed
+###
+###
 World_URLs = World_URLs[1:12] # filtered inactive worlds
+###
+###
 
 active_worlds = []
 for world in World_URLs:
@@ -40,24 +41,21 @@ for url in active_worlds:
     active_players = []
     copied_url = url
     response = requests.get("https://www.twstats.com/" + copied_url)
-    
+
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
-        td_elements = soup.find_all('td') 
-    
+        td_elements = soup.find_all('td')
+
         for td in td_elements:
             a_element = td.find('a')
             if a_element:
                 href = a_element.get('href')
                 if href.startswith('index.php?page=player&'):
-                    #print("Text:", a_element.text)
-                    #print("Href:", href)
                     active_players.append(href)
-                    #print()
-    
+
     else:
         print(response.status_code)
-        
+
     list_for_player.append(active_players)
 
 for list in list_for_player:
@@ -68,8 +66,6 @@ ultimate_player_infos = []
 for world in World_URLs:
     for urls in list_for_player:
         for player_url in urls:
-            #response = requests.get("https://www.twstats.com/" + world + player_url)
-            #print("https://www.twstats.com" + world + player_url.replace('index.php', ''))
             ultimate_player_infos.append("https://www.twstats.com" + world + player_url.replace('index.php', ''))
 
 columns = []
@@ -82,14 +78,14 @@ for gogogogo in ultimate_player_infos:
 
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
-    
+
         th_left_tags = soup.find_all('th', class_='left')
         td_tags = soup.find_all('td')
-    
+
         for tag in th_left_tags:
             tmp_1.append(tag.text)
         columns.append(tmp_1)
-    
+
         for tag in td_tags:
             tmp_2.append(tag.text)
         data.append(tmp_2)
@@ -116,7 +112,7 @@ def create_table():
                  OD_Rank TEXT, OD_Attack_Rank TEXT, OD_Defense_Rank TEXT,
                  Profile TEXT, Player_Other_Worlds TEXT, Player_Past_Worlds TEXT,
                  Profile_Views TEXT)''')
-    
+
     conn.commit()
     conn.close()
 
@@ -144,5 +140,5 @@ def insert_data(player_data):
 
 create_table()
 
-for index in results: 
+for index in results:
     insert_data(index)
