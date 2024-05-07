@@ -1,4 +1,4 @@
-# Executing Time : (5m 1s) It differs every time.
+# Executing Time : (3m 36s) It differs every time.
 
 import requests
 from bs4 import BeautifulSoup
