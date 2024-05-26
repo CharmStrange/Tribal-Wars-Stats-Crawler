@@ -4,10 +4,8 @@ import re
 from datetime import datetime
 import sqlite3
 
-# Get the current date and format it as MM-DD-YYYY
 current_date = datetime.now().strftime("%m-%d-%Y")
 
-# Use the formatted date in the database file name
 db_filename = f'{current_date}.db'
 
 URL = "https://www.twstats.com/"
