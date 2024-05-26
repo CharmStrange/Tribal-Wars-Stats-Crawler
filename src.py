@@ -1,8 +1,14 @@
-# Executing Time : (3m 36s) It differs every time.
-
 import requests
 from bs4 import BeautifulSoup
 import re
+from datetime import datetime
+import sqlite3
+
+# Get the current date and format it as MM-DD-YYYY
+current_date = datetime.now().strftime("%m-%d-%Y")
+
+# Use the formatted date in the database file name
+db_filename = f'{current_date}.db'
 
 URL = "https://www.twstats.com/"
 response = requests.get(URL)
@@ -19,9 +25,9 @@ if response.status_code == 200:
             href = a_element.get('href')
             if href.startswith('/e'):
                 World_URLs.append(href)
-
 else:
     print(response.status_code)
+
 # Checking open/closed
 ###
 ###
@@ -52,14 +58,13 @@ for url in active_worlds:
                 href = a_element.get('href')
                 if href.startswith('index.php?page=player&'):
                     active_players.append(href)
-
     else:
         print(response.status_code)
 
     list_for_player.append(active_players)
 
-for list in list_for_player:
-    for string in list:
+for player_list in list_for_player:
+    for string in player_list:
         string = string.replace('index.php', '')
 
 ultimate_player_infos = []
@@ -99,10 +104,8 @@ for index in range(len(columns)):
 
 len(results)
 
-import sqlite3
-
 def create_table():
-    conn = sqlite3.connect('player_data.db')
+    conn = sqlite3.connect(db_filename)
     c = conn.cursor()
 
     c.execute('''CREATE TABLE IF NOT EXISTS player_data
@@ -117,7 +120,7 @@ def create_table():
     conn.close()
 
 def insert_data(player_data):
-    conn = sqlite3.connect('player_data.db')
+    conn = sqlite3.connect(db_filename)
     c = conn.cursor()
 
     try:
