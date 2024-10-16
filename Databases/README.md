@@ -8,7 +8,7 @@
 
 I announce this, not every file has same rows' length and size. Reason is, some of recorded players have no texts on website, but data. Source Code will delete them automatically.
 
-```
+```SQL
 CREATE TABLE IF NOT EXISTS player_data
                  (Rank TEXT, Name TEXT, Tribe TEXT, Points TEXT, Villages TEXT,
                  Avg_Points_Per_Village TEXT, Tribe_Changes TEXT, Conquers TEXT,
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS player_data
                  Profile_Views TEXT)
 ```
 
-```
+```Python
 def insert_data(player_data):
     conn = sqlite3.connect('player_data.db')
     c = conn.cursor()
